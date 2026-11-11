@@ -26,7 +26,7 @@ JPEG, PNG, WebP, TIFF, and BMP. Support for individual features depends on the i
 ### Option A — install from a cloned/downloaded repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/imgmeta-cli.git
+https://github.com/Afternoon11/Image-MetaData-Remover.git
 cd imgmeta-cli
 python -m venv .venv
 ```
