@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imgmeta-cli"
+version = "1.0.0"
+description = "Cross-platform command-line image metadata viewer and remover"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "imgmeta-cli contributors"}]
+dependencies = ["Pillow>=10.0.0"]
+keywords = ["image", "metadata", "exif", "privacy", "cli"]
+
+[project.scripts]
+imgmeta = "imgmeta.cli:main"
+
+[tool.setuptools]
+packages = ["imgmeta"]
