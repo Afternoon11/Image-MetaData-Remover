@@ -27,7 +27,7 @@ JPEG, PNG, WebP, TIFF, and BMP. Support for individual features depends on the i
 
 ```bash
 https://github.com/Afternoon11/Image-MetaData-Remover.git
-cd imgmeta-cli
+cd Image-MetaData-Remover
 python -m venv .venv
 ```
 
