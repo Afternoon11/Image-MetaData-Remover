@@ -1,32 +1,32 @@
 # imgmeta-cli
 
-A cross-platform command-line tool to **view image metadata** and create a **metadata-stripped copy** of an image.
+A cross-platform command-line tool to **inspect image metadata** and create a **metadata-cleaned copy** of an image.
 
-Works on Windows Command Prompt, PowerShell, macOS Terminal, and Linux shells through Python's command-line interface.
+Works on Windows Command Prompt, PowerShell, macOS, and Linux through Python.
 
 ## Features
 
-- View image format, dimensions, color mode, frame count, file size, SHA-256, EXIF tags, GPS fields (when available), and other metadata exposed by Pillow.
-- Strip EXIF and common embedded metadata by re-encoding an image.
-- Process a single image or a directory; optional recursive processing.
-- Keeps the original file unchanged. By default, cleaned copies use the `_clean` suffix.
-- Preserves an embedded ICC color profile by default to help retain color appearance. Use `--no-icc` to remove it too.
+- Inspect image format, dimensions, color mode, frame count, file size, SHA-256, EXIF tags, GPS fields (when available), and metadata exposed by Pillow.
+- Remove EXIF and common embedded metadata by re-encoding an image.
+- Process one image or a directory, with optional recursive processing.
+- Keep the original unchanged; cleaned copies use the `_clean` suffix by default.
+- Preserve an embedded ICC color profile by default; use `--no-icc` to remove it too.
 
-## Supported formats
+## Supported Formats
 
-JPEG, PNG, WebP, TIFF, and BMP. Support for individual features depends on the installed Pillow codecs and the source file.
+JPEG, PNG, WebP, TIFF, and BMP. Feature support depends on the installed Pillow codecs and the source file.
 
 ## Requirements
 
 - Python 3.9 or newer
 - Pillow (installed automatically with the package)
 
-## Install
+## Installation
 
-### Option A — install from a cloned/downloaded repository
+Clone the repository:
 
 ```bash
-https://github.com/Afternoon11/Image-MetaData-Remover.git
+git clone https://github.com/Afternoon11/Image-MetaData-Remover.git
 cd Image-MetaData-Remover
 python -m venv .venv
 ```
@@ -35,12 +35,12 @@ Activate the environment:
 
 **Windows CMD**
 ```bat
-.venv\Scripts\activate.bat
+.venv\\Scripts\\activate.bat
 ```
 
 **Windows PowerShell**
 ```powershell
-.venv\Scripts\Activate.ps1
+.venv\\Scripts\\Activate.ps1
 ```
 
 **Linux / macOS**
@@ -55,20 +55,11 @@ python -m pip install --upgrade pip
 python -m pip install -e .
 ```
 
-You can now run `imgmeta` from that activated environment.
-
-### Option B — run without installing the command
-
-From the repository folder:
-
-```bash
-python -m imgmeta view photo.jpg
-python -m imgmeta clean photo.jpg
-```
+You can now run `imgmeta` from the activated environment.
 
 ## Usage
 
-### 1. View metadata
+### View metadata
 
 ```bash
 imgmeta view photo.jpg
@@ -80,7 +71,7 @@ Save the report as JSON:
 imgmeta view photo.jpg --output report.json
 ```
 
-### 2. Remove metadata
+### Remove metadata
 
 Create `photo_clean.jpg` beside the original:
 
@@ -100,35 +91,28 @@ Choose an output directory:
 imgmeta clean photo.jpg --output cleaned_images/
 ```
 
-Remove ICC color profile as well:
+Remove the ICC color profile too:
 
 ```bash
 imgmeta clean photo.jpg --no-icc
 ```
 
-### 3. Batch clean a directory
-
-Non-recursive:
+### Batch clean a directory
 
 ```bash
 imgmeta clean ./photos --output ./cleaned
-```
-
-Recursive:
-
-```bash
 imgmeta clean ./photos --recursive --output ./cleaned
 ```
 
 On Windows, paths can be quoted:
 
 ```bat
-imgmeta clean "C:\Users\You\Pictures" --recursive --output "C:\Users\You\Pictures\cleaned"
+imgmeta clean "C:\\Users\\You\\Pictures" --recursive --output "C:\\Users\\You\\Pictures\\cleaned"
 ```
 
 If an output file already exists, the tool refuses to overwrite it. Add `--overwrite` only when replacement is intentional.
 
-### 4. Help and version
+### Help and version
 
 ```bash
 imgmeta --help
@@ -137,15 +121,15 @@ imgmeta clean --help
 imgmeta --version
 ```
 
-## Important behavior and limitations
+## Important Behavior and Limitations
 
-- **The source is not modified.** The tool writes a new output file unless you explicitly use `--overwrite`.
-- Metadata removal is performed by decoding and re-encoding the image. It is not a byte-for-byte metadata deletion.
-- **JPEG is lossy:** cleaning re-encodes JPEG at quality 95, so pixel data may change slightly. Keep a backup if exact image preservation matters.
-- Animated WebP handling depends on Pillow's installed codec support. Verify the output before deleting originals.
-- ICC profiles are retained by default because they affect color rendering, not personal identity. `--no-icc` removes them.
-- The viewer reports metadata Pillow exposes. Some vendor-specific, proprietary, sidecar, filesystem, or container-level data may not be displayed.
-- This tool does not guarantee that every possible metadata block is removed from every file variant. For forensic-grade sanitization, validate outputs with an independent tool such as ExifTool.
+- The source image is not modified. The tool writes a new output file unless you explicitly use `--overwrite`.
+- Metadata removal is performed by decoding and re-encoding; it is not a byte-for-byte metadata deletion.
+- JPEG is lossy: cleaning re-encodes JPEG at quality 95, so pixel data may change slightly. Keep a backup if exact image preservation matters.
+- Animated WebP handling depends on Pillow's installed codec support. Verify output before deleting originals.
+- ICC profiles are retained by default because they affect color rendering. Use `--no-icc` to remove them too.
+- The viewer reports metadata Pillow exposes. Vendor-specific, proprietary, sidecar, filesystem, or container-level data may not be displayed.
+- The tool does not guarantee that every possible metadata block is removed from every file variant. For forensic-grade sanitization, validate outputs independently with a tool such as ExifTool.
 - Never rely on metadata removal as the only privacy protection before publishing sensitive images.
 
 ## Development
