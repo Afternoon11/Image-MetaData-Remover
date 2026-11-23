@@ -142,3 +142,16 @@ python -m imgmeta --help
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+
+## Processing Workflow
+
+```mermaid
+flowchart TD
+ A[Input Image or Directory] --> B[Inspect Metadata]
+ B --> C{Clean Requested?}
+ C -- No --> D[Display or Export Report]
+ C -- Yes --> E[Re-encode Image]
+ E --> F[Write Separate Cleaned Copy]
+ F --> G[Validate Output Independently]
+```
